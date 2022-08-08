@@ -1,0 +1,66 @@
+import { burgersService } from "../services/BurgersService"
+
+export class BurgersController extends BaseController {
+  constructor(){
+    super('/api/burgers')
+
+    this.router
+    .get('', this.getBurgers)
+    .post('', this.createBurger)
+    .get('/:burgerId', this.getBurgerById)
+    .put('/:burgerId', this.editBurger)
+    .delete('/:burgerId', this.deleteBurger)
+  }
+
+// POST [X]
+// GET BY ID [X]
+// PUT BY ID [X]
+// DELETE BY ID []
+ 
+async getBurgers(req, res, next) {
+  try {
+    let burgers = await burgersService.getBurgers()
+    res.send(burgers)
+  } catch (error) {
+    next(error)
+  }
+}
+
+async createBurger(req, res, next) {
+  try {
+    let burgerData = req.body
+    let burger = await burgersService.createBurger(burgerData)
+    res.send(burger)
+  } catch (error) {
+    next(error)
+  }
+}
+
+async getBurgerById(req, res, next) {
+  try {
+    let burger = await burgersService.getBurgerById(req.params.burgerId)
+    res.send(burger)
+  } catch (error) {
+    next(error)
+  }
+}
+
+async editBurger(req, res, next) {
+  try {
+    let burger = await burgersService.editBurger(req.params.burgerId, req.body)
+    res.send(burger)
+  } catch (error) {
+    next(error)
+  }
+}
+
+async deleteBurger(req, res, next) {
+  try {
+    let burger = await burgersService.deleteBurger(req.params.burgerId)
+    res.send(burger)
+  } catch (error) {
+    next(error)
+  }
+}
+
+}

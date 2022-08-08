@@ -1,6 +1,7 @@
 import { valuesService } from '../services/ValueService'
 import BaseController from '../utils/BaseController'
 
+export class BurgersController extends BaseController {}
 export class ValuesController extends BaseController {
   constructor() {
     super('api/values')
